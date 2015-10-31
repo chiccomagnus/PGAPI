@@ -16,7 +16,6 @@ function UpdateCookies() {
     }
 }
 function SaveCookies($aRH) {
-    //print_r($aRH);
     $n = count($aRH); // Number of Pieces
     $counter = 0;
     while ($counter <= $n) {
@@ -67,15 +66,11 @@ class PGAPI{
         $context = stream_context_create($aHTTP);
         $html = mb_convert_encoding(file_get_contents($sURL, false, $context),"HTML-ENTITIES","UTF-8"); // Send the Request 
         $ResponseHeaders = $http_response_header;
-        //echo $html;
-        //print_r( $ResponseHeaders);
         SaveCookies($ResponseHeaders); // Saves cookies to cookie directory (if any).
         return $html;
-        //return file_get_contents($sURL);
     }
     public function getResult(){
         $html = $this->getContents($this->url);
-        //echo $html;
         $dom = new DOMDocument();
         @$dom->loadHTML($html);
         $xpath = new DOMXPath($dom);
