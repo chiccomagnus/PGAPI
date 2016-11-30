@@ -3,7 +3,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-require 'flight/Flight.php';
+require 'vendor/autoload.php';
 error_reporting(E_ERROR);
 require 'class.php';
 
@@ -11,8 +11,12 @@ Flight::route('/number/@number', function($number){
     $p = new PGAPI("telefono-".$number);
 });
 
-Flight::route('/company/@name(/place/@place)', function($name,$place = false){
-    $p = new PGAPI($name.(($place) ? "/".$place : ""));
+Flight::route('/company/@name(/place/@place)(/page/@page)', function($name,$place = false, $page = 1){
+    $p = new PGAPI($name.(($place) ? "/".$place : ""), $page);
+});
+
+Flight::route('/company/@name(/place/@place)(/page/@page)', function($name,$place = false, $page = 1){
+    $p = new PGAPI($name.(($place) ? "/".$place : ""), $page);
 });
 
 Flight::route('/place/@place', function($place){
