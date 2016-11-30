@@ -7,6 +7,7 @@ Ecco le API per accedere alle pagine gialle italiane
 ###Installazione
  - Scarica ed estrai l'archivio
  - `composer install`
+ 
 ####Requisiti
  - PHP >= 5.4
  - Il pacchetto utilizza il microframework flight (http://flightphp.com/) che funziona sia con Apache che con Nginx. La versione che andate ad installare disponibile in questo pacchetto è predisposta per Apache ma potete anche configurarla per Nginx
@@ -56,7 +57,7 @@ Ecco una risposta tipica a una chiamata alle API
     "length": ...,
     "source": "http:\/\/www.paginegialle.it\/ricerca\/...",
     "query": "...",
-    "nextPage": NULL,
+    "nextPage": null,
 }
 ```
 **NOTE**
@@ -70,6 +71,7 @@ Si può anche usare direttamente la classe predisposta nel file <b>class.php</b>
 ###Install
  - Download and extract the archive
  - `composer install`
+ 
 ####Requirements
 - PHP >= 5.4<br>
 - The package uses the microframework flight (http://flightphp.com/) that works with both Apache and Nginx. The version that you are going to install, available in this package, is designed for Apache but tou can change it for Nginx<br>
@@ -119,7 +121,7 @@ Here is a typical response to a call to the API
     "length": ...,
     "source": "http:\/\/www.paginegialle.it\/ricerca\/...",
     "query": "...",
-    "nextPage": NULL
+    "nextPage": null
 }
 ```
 **NOTE**
