@@ -1,14 +1,17 @@
 # PGAPI
-these are the API to access the Italian yellow pages. Ecco le API per accedere alle pagine gialle italiane
+http://www.paginegialle.it/
+These are the API to access the Italian yellow pages. 
+Ecco le API per accedere alle pagine gialle italiane
 
 ##ITALIANO
-Ecco le api per accedere alle pagine gialle.
 ###Installazione
-Scarica ed estrai l'archivio nella posizione da te preferita e il gioco è fatto.
+ - Scarica ed estrai l'archivio
+ - `composer install`
+ 
 ####Requisiti
--PHP >= 5.4<br>
--il pacchetto utilizza il microframework flight (http://flightphp.com/) che funziona sia con Apache che con Nginx. La versione che andate ad installare disponibile in questo pacchetto è predisposta per Apache ma potete anche configurarla per Nginx<br>
--Permessi di scrittura nella cartella in cui andate ad estrarre l'archivio.
+ - PHP >= 5.4
+ - Il pacchetto utilizza il microframework flight (http://flightphp.com/) che funziona sia con Apache che con Nginx. La versione che andate ad installare disponibile in questo pacchetto è predisposta per Apache ma potete anche configurarla per Nginx
+ - Permessi di scrittura nella cartella `Cookies/`
 
 ###Utilizzo
 Una volta installato il pacchetto potrai accedere alle api come ti è più comodo, o utilizzandolo come server esterno o come script interno.
@@ -53,23 +56,26 @@ Ecco una risposta tipica a una chiamata alle API
     "status": "OK" | "ERROR",
     "length": ...,
     "source": "http:\/\/www.paginegialle.it\/ricerca\/...",
-    "query": "..."
+    "query": "...",
+    "nextPage": null,
 }
 ```
-<br><br>
-Nel caso sopravvenga un errore lo status passa da OK a ERROR.
+**NOTE**
+Nel caso sopravvenga un errore lo status passa da `OK` a `ERROR`.
+`nextPage` contiene l'url da chiamare per ottenere la prossima lista di risultati
 
 ###Uso con PHP
 Si può anche usare direttamente la classe predisposta nel file <b>class.php</b>. Per la chiamata rivolgersi a come vengono implementate le URL sul sito delle pagine gialle.
 
 ##ENGLISH
-These are the API for the Italian Yellow Pages.
 ###Install
-Download and extract the archive to the position you prefer, and you're done.
+ - Download and extract the archive
+ - `composer install`
+ 
 ####Requirements
--PHP >= 5.4<br>
--The package uses the microframework flight (http://flightphp.com/) that works with both Apache and Nginx. The version that you are going to install, available in this package, is designed for Apache but tou can change it for Nginx<br>
--Permission to write to the folder where you go to extract the archive.
+- PHP >= 5.4<br>
+- The package uses the microframework flight (http://flightphp.com/) that works with both Apache and Nginx. The version that you are going to install, available in this package, is designed for Apache but tou can change it for Nginx<br>
+- Permission to write to the folder `Cookies/` 
 
 ###Using
 When the package is installed you can access the API as you are more comfortable, or using it as external server or internal the script.
@@ -114,11 +120,13 @@ Here is a typical response to a call to the API
     "status": "OK" | "ERROR",
     "length": ...,
     "source": "http:\/\/www.paginegialle.it\/ricerca\/...",
-    "query": "..."
+    "query": "...",
+    "nextPage": null
 }
 ```
-<br><br>
-If an error will overtake the status changes from OK to ERROR.
+**NOTE**
+If an error will overtake the status changes from `OK` to `ERROR`.
+`nextPage` contains the url to retrieve the next set of results
 
 ### Using PHP
 You can also directly use the class in the <b> class.php script</b>. For the direct call see how are implemented as URLs on the site of the yellow pages.

@@ -1,1 +1,5 @@
+PGAPI/Cookies/*.txt
+
+composer.lock
+vendor/
 .DS_Store

@@ -48,13 +48,15 @@ class PGAPI{
     protected $websitexpath = ".//a[@class=\"elementLink\"]/@href";
     protected $categoryxpath = ".//a[@class=\"cat\"]";
     protected $categorynumberxpath = "substring(.//a[@class=\"cat\"]/@href,40)";
+    protected $pagination = ".//a[@class=\"paginationBtn arrowBtn rightArrowBtn\"]";
     protected $nodi;
     protected $length = 0;
+    protected $page;
     protected $risultato = array();
     protected function getContents($sURL){
         
         $sCookie = UpdateCookies(); // Prepare cookies for deliverance
-       
+
         $aHTTP['http']['method']          = 'GET';
         $aHTTP['http']['header']          = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36\r\n";
         $aHTTP['http']['header']         .= "Referer: ".$this->url."\r\n";
@@ -103,15 +105,30 @@ class PGAPI{
         $this->risultato["length"] = $this->length;
         $this->risultato["source"] = $this->url;
         $this->risultato["query"] = $this->query;
+
+        // Next page button is available
+        if( $xpath->query($this->pagination)->length > 0) { 
+            $url = Flight::request()->url;
+            $page = $this->page + 1;
+            if (strpos($url, 'page') !== false) {
+                $next = substr($url, 0, strrpos( $url, '/')) . $page;
+            } else {
+                $next = $url . '/page/' . $page;
+            }
+            $this->risultato["nextPage"] = $next;
+        } else {
+            $this->risultato["nextPage"] = NULL;
+        }
         
         return json_encode($this->risultato, JSON_PRETTY_PRINT);
     }
-    public function __construct($query){
-        $query = trim($query);
+    public function __construct($query, $page = 1){
+        $this->page = $page;
+        $query = trim(str_replace(' ', '%20', $query)) . '/p-' . $this->page;;
         $this->query = $query;
         if($query){
-            $this->url = $this->base_url.$query;
-            
+            // 50 is the upper limit for the number of returned results
+            $this->url = $this->base_url.$query.'?mr=50'; 
             echo $this->getResult();
         }
     }
