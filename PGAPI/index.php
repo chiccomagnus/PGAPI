@@ -7,34 +7,28 @@ require 'vendor/autoload.php';
 error_reporting(E_ERROR);
 require 'class.php';
 
-Flight::route('/number/@number', function($number){
-    $p = new PGAPI("telefono-".$number);
+Flight::route('/number/@number(/page/@page)', function($number, $page = false){
+    $p = new PGAPI("telefono-".$number,$page);
 });
 
-Flight::route('/company/@name(/place/@place)(/page/@page)', function($name,$place = false, $page = 1){
+Flight::route('/company/@name(/place/@place)(/page/@page)', function($name,$place = false, $page = false){
     $p = new PGAPI($name.(($place) ? "/".$place : ""), $page);
 });
 
-Flight::route('/company/@name(/place/@place)(/page/@page)', function($name,$place = false, $page = 1){
-    $p = new PGAPI($name.(($place) ? "/".$place : ""), $page);
+Flight::route('/place/@place(/page/@page)', function($place, $page = false){
+    $p = new PGAPI("indirizzo-".$place, $page);
 });
 
-Flight::route('/place/@place', function($place){
-    $p = new PGAPI("indirizzo-".$place);
+Flight::route('/category/@category(/page/@page)', function($category, $page = false){
+    $p = new PGAPI("cat-".$category, $page);
 });
 
-Flight::route('/category/@category', function($category){
-    $p = new PGAPI("cat/".$category);
-});
-
-Flight::route('/search/@term', function($term){
-    $p = new PGAPI($term);
+Flight::route('/search/@term(/page/@page)', function($term, $page = false){
+    $p = new PGAPI($term, $page);
 });
 
 Flight::route('/*',function(){
-    echo "{
-    
-    }";
+    echo json_encode(array("status" => "ERROR", "errorDescription" => "Invalid Path"),JSON_PRETTY_PRINT);
 });
 
 Flight::start();

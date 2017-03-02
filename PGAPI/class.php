@@ -111,7 +111,7 @@ class PGAPI{
             $url = Flight::request()->url;
             $page = $this->page + 1;
             if (strpos($url, 'page') !== false) {
-                $next = substr($url, 0, strrpos( $url, '/')) . $page;
+                $next = substr($url, 0, strrpos( $url, '/')+1) . $page;
             } else {
                 $next = $url . '/page/' . $page;
             }
@@ -122,9 +122,14 @@ class PGAPI{
         
         return json_encode($this->risultato, JSON_PRETTY_PRINT);
     }
-    public function __construct($query, $page = 1){
+    public function __construct($query, $page = false){
         $this->page = $page;
-        $query = trim(str_replace(' ', '%20', $query)) . '/p-' . $this->page;;
+        $query = trim(str_replace(' ', '%20', $query));
+        if($page != false && $page > 1){
+            $query .= '/p-' . $this->page;
+        }else{
+            $this->page = 1;
+        }
         $this->query = $query;
         if($query){
             // 50 is the upper limit for the number of returned results
