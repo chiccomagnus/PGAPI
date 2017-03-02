@@ -109,6 +109,7 @@ class PGAPI{
         // Next page button is available
         if( $xpath->query($this->pagination)->length > 0) { 
             $url = Flight::request()->url;
+            if(substr($url,-1,1) == '/') $url = substr($url,0,-1);
             $page = $this->page + 1;
             if (strpos($url, 'page') !== false) {
                 $next = substr($url, 0, strrpos( $url, '/')+1) . $page;
