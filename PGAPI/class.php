@@ -29,7 +29,7 @@ function SaveCookies($aRH) {
 }
 
 class PGAPI{
-    protected $base_url = "http://www.paginegialle.it/ricerca/";
+    protected $base_url = "https://www.paginegialle.it/ricerca/";
     protected $query = "";
     protected $url = "";
     protected $nodexpath = "//div[contains(@class,\"vcard\")]";
