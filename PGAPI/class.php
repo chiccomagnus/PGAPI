@@ -134,8 +134,12 @@ class PGAPI{
         $this->query = $query;
         if($query){
             // 50 is the upper limit for the number of returned results
-            $this->url = $this->base_url.$query.'?mr=50'; 
-            echo $this->getResult();
+            $this->url = $this->base_url.$query.'?mr=1'; 
+            $this->getResult();
+            $length=($this->length);
+            if ($length>0){
+                echo json_encode($this->risultato);
+            }
         }
     }
 }

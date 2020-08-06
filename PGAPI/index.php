@@ -9,16 +9,8 @@ error_reporting(E_ERROR);
 require 'class.php';
 
 if ($argv[1]) {
-  $number = (int) $argv[1];
-  $p = new PGAPI("telefono-$number", $page);
+  $number = $argv[1];
+  new PGAPI("telefono-$number", $page);
 }
 
-
-
-
-Flight::route('/*', function() {
-  echo json_encode(array("status" => "ERROR", "errorDescription" => "Invalid Path"), JSON_PRETTY_PRINT);
-});
-
-Flight::start();
 ?>
