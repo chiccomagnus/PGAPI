@@ -33,7 +33,7 @@ class PGAPI{
     protected $query = "";
     protected $url = "";
     protected $nodexpath = "//section[contains(@class,\"vcard\")]";
-    protected $namexpath = ".//h1[contains(@itemprop,\"name\")]/a";
+    protected $namexpath = ".//h2[contains(@itemprop,\"name\")]/a";
     protected $subtitlexpath = './/a[@class="cat"]';
     protected $descriptionxpath = './/p[@itemprop="description"]';
     protected $imagexpath = ".//img[@itemprop=\"image\"]/@src";
