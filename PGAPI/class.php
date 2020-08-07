@@ -33,7 +33,7 @@ class PGAPI{
     protected $query = "";
     protected $url = "";
     protected $nodexpath = "//section[contains(@class,\"vcard\")]";
-    protected $namexpath = ".//h1[contains(@itemprop,\"name\")]/a";
+    protected $namexpath = ".//h2[contains(@itemprop,\"name\")]/a";
     protected $subtitlexpath = './/a[@class="cat"]';
     protected $descriptionxpath = './/p[@itemprop="description"]';
     protected $imagexpath = ".//img[@itemprop=\"image\"]/@src";
@@ -134,8 +134,12 @@ class PGAPI{
         $this->query = $query;
         if($query){
             // 50 is the upper limit for the number of returned results
-            $this->url = $this->base_url.$query.'?mr=50'; 
-            echo $this->getResult();
+            $this->url = $this->base_url.$query.'?mr=1'; 
+            $this->getResult();
+            $length=($this->length);
+            if ($length>0){
+                echo json_encode($this->risultato);
+            }
         }
     }
 }
